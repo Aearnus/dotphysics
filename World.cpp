@@ -1,5 +1,6 @@
 #include "World.h"
 #include "ElementTypes.h"
+#include "Element.h"
 
 World::World() {
 	for (int y = 0; y++; y < HEIGHT) {

@@ -1,10 +1,10 @@
+#pragma once
 #include "Constants.h"
 #include "Element.h"
 class World 
 {
 public:
 	World();
-	~World();
 
 	// Getters and setters
 	Element* getPixel(int x, int y) {
