@@ -10,10 +10,10 @@ public:
 		type = t;
 	}
 
-	float x;
-	float y;
-	float xVel;
-	float yVel;
+	double x;
+	double y;
+	double xVel;
+	double yVel;
 	types type;
 
 private:

@@ -4,6 +4,7 @@
 #include "World.h"
 #include <string>
 #include <vector>
+#include <cmath>
 
 int main()
 {
@@ -21,21 +22,22 @@ int main()
         if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
             sf::Vector2i mousePos = sf::Mouse::getPosition(window);
             if (mousePos.x >= 0 && mousePos.x <= WIDTH && mousePos.y >= 0 && mousePos.y <= HEIGHT) {
-                printf("PUTTING ELEMENT AT X: %i, Y: %i\n", mousePos.x, mousePos.y);
-                world.pixels.push_back(Element((float)mousePos.x, (float)mousePos.y, DIRT));
+                bool positionTaken = false;
+                for (auto e : world.pixels) { if (floor(e.x) == mousePos.x || floor(e.y) == mousePos.y) { positionTaken = true; }}
+                if (!positionTaken) {
+                    printf("PUTTING ELEMENT AT X: %i, Y: %i\n", mousePos.x, mousePos.y);
+                    world.pixels.push_back(Element((double)mousePos.x, (double)mousePos.y, DIRT));
+                }
             }
         }
 
         window.clear(sf::Color::Black);
-        for(std::vector<Element>::iterator it = world.pixels.begin(); it != world.pixels.end(); ++it) {
-            switch ((*it).type) {
-                case DIRT: 
-                sf::RectangleShape pix(sf::Vector2f(1,1));
-                pix.setPosition((int)(*it).x, (int)(*it).y);
-                pix.setFillColor(sf::Color(255, 150, 0));
-                window.draw(pix);
-                break;
-            }
+        for(auto e : world.pixels) {
+            sf::RectangleShape pix(sf::Vector2f(1,1));
+            pix.setPosition((int)floor(e.x), (int)floor(e.y));
+            pix.setFillColor(typeColors[e.type]);
+            window.draw(pix);
+            break;
         }
         window.display();
     }
