@@ -1,5 +1,5 @@
 #pragma once
 enum types {
-	AIR,
-	DIRT
+	DIRT,
+	DUST
 };

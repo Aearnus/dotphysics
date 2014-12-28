@@ -3,6 +3,7 @@
 #include "Constants.h"
 #include "World.h"
 #include <string>
+#include <vector>
 
 int main()
 {
@@ -21,23 +22,19 @@ int main()
             sf::Vector2i mousePos = sf::Mouse::getPosition(window);
             if (mousePos.x >= 0 && mousePos.x <= WIDTH && mousePos.y >= 0 && mousePos.y <= HEIGHT) {
                 printf("PUTTING ELEMENT AT X: %i, Y: %i\n", mousePos.x, mousePos.y);
-                world.setPixel(mousePos.x, mousePos.y, Element(DIRT));
+                world.pixels.push_back(Element((float)mousePos.x, (float)mousePos.y, DIRT));
             }
         }
 
         window.clear(sf::Color::Black);
-        for (int y = 0; y < HEIGHT; y++) {
-            for (int x = 0; x < WIDTH; x++) { 
-                switch (world.getPixel(x, y).getType()) {
-                    case AIR:
-                    break;
-                    case DIRT: 
-                    sf::RectangleShape pix(sf::Vector2f(1,1));
-                    pix.setPosition(x, y);
-                    pix.setFillColor(sf::Color(255, 150, 0));
-                    window.draw(pix);
-                    break;
-                }
+        for(std::vector<Element>::iterator it = world.pixels.begin(); it != world.pixels.end(); ++it) {
+            switch ((*it).type) {
+                case DIRT: 
+                sf::RectangleShape pix(sf::Vector2f(1,1));
+                pix.setPosition((int)(*it).x, (int)(*it).y);
+                pix.setFillColor(sf::Color(255, 150, 0));
+                window.draw(pix);
+                break;
             }
         }
         window.display();

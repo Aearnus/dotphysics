@@ -3,23 +3,18 @@
 class Element
 {
 public:
-	Element()
+	Element(float xPos, float yPos, types t)
 	{
-		type = AIR;
-	}
-	Element(types t)
-	{
+		x = xPos;
+		y = yPos;
 		type = t;
 	}
 
-	types getType()
-	{
-		return type;
-	}
-	void setType(types t)
-	{
-		type = t;
-	}
-private:
+	float x;
+	float y;
+	float xVel;
+	float yVel;
 	types type;
+
+private:
 };
