@@ -6,9 +6,8 @@ class World
 public:
 	World();
 
-	// Getters and setters
-	Element* getPixel(int x, int y) {
-		return &grid[y][x];
+	Element getPixel(int x, int y) {
+		return grid[y][x];
 	}
 	void setPixel(int x, int y, Element elem) {
 		grid[y][x] = elem;

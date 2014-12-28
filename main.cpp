@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include "Constants.h"
 #include "World.h"
+
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), ".physics", sf::Style::Titlebar | sf::Style::Close);
@@ -17,13 +18,25 @@ int main()
         }
         if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
             sf::Vector2i mousePos = sf::Mouse::getPosition(window);
-            printf("PRESSED MOUSE AT X: %i, Y: %i\n", mousePos.x, mousePos.y);
             if (mousePos.x >= 0 && mousePos.x <= WIDTH && mousePos.y >= 0 && mousePos.y <= HEIGHT) {
                 printf("PUTTING ELEMENT AT X: %i, Y: %i\n", mousePos.x, mousePos.y);
+                world.setPixel(mousePos.x, mousePos.y, Element(DIRT));
             }
         }
 
         window.clear(sf::Color::Black);
+        for (int y = 0; y++; y < HEIGHT) {
+            for (int x = 0; x++; x < WIDTH) { 
+                switch (world.getPixel(x, y).getType()) {
+                    case DIRT: 
+                    sf::RectangleShape pix(sf::Vector2f(1,1));
+                    pix.setPosition(x, y);
+                    pix.setFillColor(sf::Color(255, 150, 0));
+                    window.draw(pix);
+                    break;
+                }
+            }
+        }
         window.display();
     }
     return 0;
