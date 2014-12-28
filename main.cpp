@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include "Constants.h"
 #include "World.h"
+#include <string>
 
 int main()
 {
@@ -25,9 +26,11 @@ int main()
         }
 
         window.clear(sf::Color::Black);
-        for (int y = 0; y++; y < HEIGHT) {
-            for (int x = 0; x++; x < WIDTH) { 
+        for (int y = 0; y < HEIGHT; y++) {
+            for (int x = 0; x < WIDTH; x++) { 
                 switch (world.getPixel(x, y).getType()) {
+                    case AIR:
+                    break;
                     case DIRT: 
                     sf::RectangleShape pix(sf::Vector2f(1,1));
                     pix.setPosition(x, y);
