@@ -1,1 +1,0 @@
-g++ main.cpp World.cpp Physics.cpp -std=c++1y -o dotphysics -Wall -Wextra -pedantic -lsfml-graphics -lsfml-window -lsfml-system
