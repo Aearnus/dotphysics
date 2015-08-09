@@ -2,10 +2,9 @@
 #include "Constants.h"
 #include "Element.h"
 #include <vector>
-class World 
-{
+class World {
 public:
 	World();
+    void Tick();
 	std::vector<Element> pixels;
-private:
 };

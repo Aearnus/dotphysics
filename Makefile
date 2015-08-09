@@ -1,5 +1,5 @@
 COMPILER = g++
-FILES = main.cpp World.cpp Physics.cpp
+FILES = main.cpp World.cpp ElementTypes.cpp
 LIBRARIES = -lsfml-graphics -lsfml-window -lsfml-system
 FLAGS = -std=c++1y -o dotphysics -Wall -Wextra -pedantic
 

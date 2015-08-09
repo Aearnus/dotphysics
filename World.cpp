@@ -3,3 +3,7 @@
 #include "Element.h"
 
 World::World() { }
+
+void World::Tick() {
+  
+}

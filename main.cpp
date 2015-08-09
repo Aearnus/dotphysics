@@ -37,7 +37,6 @@ int main()
             pix.setPosition((int)floor(e.x), (int)floor(e.y));
             pix.setFillColor(typeColors[e.type]);
             window.draw(pix);
-            break;
         }
         window.display();
     }

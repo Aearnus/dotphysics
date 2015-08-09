@@ -1,7 +1,6 @@
 #pragma once
 #include "ElementTypes.h"
-class Element
-{
+class Element {
 public:
 	Element(float xPos, float yPos, types t)
 	{
