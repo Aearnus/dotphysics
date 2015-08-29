@@ -44,15 +44,16 @@ int main()
         window.clear(sf::Color::Black);
         for(size_t pixelIndex = 0; pixelIndex < WORLD_SIZE; ++pixelIndex) {
             if (world.pixels[pixelIndex] != nullptr) {
-                Element* currentPixelPointer = world.pixels[pixelIndex];
+                Element currentPixel = *world.pixels[pixelIndex];
+                printf("drawing pixel X: %i, Y: %i, MAT: %i\n", currentPixel.x, currentPixel.y, currentPixel.type);
                 //updating
                 //e.tick(world.pixels);
-                currentPixelPointer->y += 1;
+                //currentPixelPointer->y += 1;
 
                 //rendering
                 sf::RectangleShape pix(sf::Vector2f(1,1));
-                pix.setPosition(floor(currentPixelPointer->x), floor(currentPixelPointer->y));
-                pix.setFillColor(typeColors[currentPixelPointer->type]);
+                pix.setPosition(floor(currentPixel.x), floor(currentPixel.y));
+                pix.setFillColor(typeColors[currentPixel.type]);
                 window.draw(pix);
             }
         }
