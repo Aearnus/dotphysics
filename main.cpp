@@ -25,7 +25,13 @@ int main()
             sf::Vector2i mousePos = sf::Mouse::getPosition(window);
             if (mousePos.x >= 0 && mousePos.x <= WIDTH && mousePos.y >= 0 && mousePos.y <= HEIGHT) {
                 bool positionTaken = false;
-                for (auto e : world.pixels) { if (floor(e->x) == mousePos.x || floor(e->y) == mousePos.y) { positionTaken = true; }}
+                for (auto e : world.pixels) {
+                    if (e != nullptr) {
+                        if (floor(e->x) == mousePos.x || floor(e->y) == mousePos.y) { //if there's not a pixel under your cursor
+                            positionTaken = true;
+                        }
+                    }
+                }
                 if (!positionTaken) {
                     printf("putting element at X: %i, Y: %i\n", mousePos.x, mousePos.y);
                     Element currentPixel = Element((double)mousePos.x, (double)mousePos.y, DIRT);
