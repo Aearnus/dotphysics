@@ -1,5 +1,6 @@
 #include "Element.h"
 #include "ElementTypes.h"
+#include "Constants.h"
 #include <vector>
 
 Element::Element(float xPos, float yPos, types t) {
