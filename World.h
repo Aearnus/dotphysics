@@ -6,6 +6,6 @@
 class World {
 public:
 	World();
-    int placePixel(Pixel* pixel);
-	Pixel* world[WORLD_SIZE] pixels;
+    int placePixel(Element* pixel);
+	Element* pixels[WORLD_SIZE];
 };
