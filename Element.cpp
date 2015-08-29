@@ -12,7 +12,7 @@ Element::Element(float xPos, float yPos, types t) {
 void Element::tick(std::vector<Element> otherPixels) {
     for (auto e : otherPixels) { //for every pixel
         if (&e != this) { //that isn't the current one
-            if ((e.x - this->x < 1.01) || (this->x - HEIGHT < 5)) { //check if there's another pixel below or you're on the ground
+            if ((e.x - x < 1.01) || (x > 5)) { //check if there's another pixel below or you're on the ground
                 xVel = 0;
             } else {
                 xVel += GRAVITY;
