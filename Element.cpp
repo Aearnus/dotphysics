@@ -2,6 +2,7 @@
 #include "ElementTypes.h"
 #include "Constants.h"
 #include <vector>
+#include <cmath>
 
 Element::Element(float xPos, float yPos, types t) {
     x = xPos;
@@ -10,15 +11,19 @@ Element::Element(float xPos, float yPos, types t) {
 }
 
 void Element::tick(std::vector<Element> otherPixels) {
+    int willApplyGravity = 1;
     for (auto e : otherPixels) { //for every pixel
         if (&e != this) { //that isn't the current one
-            if ((x - e.x < 1.01) || (x > 5)) { //check if there's another pixel below or you're on the ground
-                xVel = 0;
-            } else {
-                xVel += GRAVITY;
+            if ((y - e.y < 1.01) || (y > 5) || floor(x) - floor(e.x) == 0){ //check if there's another pixel below or you're on the ground
+                willApplyGravity = 0;
             }
-            x += xVel;
         }
     }
+    if (willApplyGravity) {
+        yVel += GRAVITY;
+    } else {
+        yVel = 0;
+    }
+    y += yVel;
 }
     
