@@ -19,20 +19,27 @@ int main()
                 running = false;
             }
         }
+
+        //placing pixels
         if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
             sf::Vector2i mousePos = sf::Mouse::getPosition(window);
             if (mousePos.x >= 0 && mousePos.x <= WIDTH && mousePos.y >= 0 && mousePos.y <= HEIGHT) {
                 bool positionTaken = false;
                 for (auto e : world.pixels) { if (floor(e.x) == mousePos.x || floor(e.y) == mousePos.y) { positionTaken = true; }}
                 if (!positionTaken) {
-                    printf("PUTTING ELEMENT AT X: %i, Y: %i\n", mousePos.x, mousePos.y);
+                    printf("putting element at X: %i, Y: %i\n", mousePos.x, mousePos.y);
                     world.pixels.push_back(Element((double)mousePos.x, (double)mousePos.y, DIRT));
                 }
             }
         }
 
+        //render/update loop
         window.clear(sf::Color::Black);
         for(auto e : world.pixels) {
+            //updating
+            e.tick(world.pixels);
+            
+            //rendering
             sf::RectangleShape pix(sf::Vector2f(1,1));
             pix.setPosition((int)floor(e.x), (int)floor(e.y));
             pix.setFillColor(typeColors[e.type]);
