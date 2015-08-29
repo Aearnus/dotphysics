@@ -35,14 +35,16 @@ int main()
 
         //render/update loop
         window.clear(sf::Color::Black);
-        for(auto e : world.pixels) {
+        for(size_t pixelIndex = 0; pixelIndex < world.pixels.size(); ++pixelIndex) {
+            Element currentPixel = world.pixels.at(pixelIndex);
             //updating
-            e.tick(world.pixels);
-            
+            //e.tick(world.pixels);
+            currentPixel.y += 1;
+            //TODO: YOU NEED TO ROLL YOUR OWN VECTOR SYSTEM BECAUSE C++ DOESN'T SUPPORT IN PLACE EDITING
             //rendering
             sf::RectangleShape pix(sf::Vector2f(1,1));
-            pix.setPosition((int)floor(e.x), (int)floor(e.y));
-            pix.setFillColor(typeColors[e.type]);
+            pix.setPosition((int)floor(currentPixel.x), (int)floor(currentPixel.y));
+            pix.setFillColor(typeColors[currentPixel.type]);
             window.draw(pix);
         }
         window.display();

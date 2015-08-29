@@ -20,10 +20,10 @@ void Element::tick(std::vector<Element> otherPixels) {
         }
     }
     if (willApplyGravity) {
-        yVel += GRAVITY;
+        this->yVel += GRAVITY;
     } else {
-        yVel = 0;
+        this->yVel = 0;
     }
-    y += yVel;
+    this->y += yVel;
 }
     
