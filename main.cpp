@@ -25,10 +25,10 @@ int main()
             sf::Vector2i mousePos = sf::Mouse::getPosition(window);
             if (mousePos.x >= 0 && mousePos.x <= WIDTH && mousePos.y >= 0 && mousePos.y <= HEIGHT) {
                 bool positionTaken = false;
-                for (auto e : world.pixels) { if (floor(e.x) == mousePos.x || floor(e.y) == mousePos.y) { positionTaken = true; }}
+                for (auto e : world.pixels) { if (floor(e->x) == mousePos.x || floor(e->y) == mousePos.y) { positionTaken = true; }}
                 if (!positionTaken) {
                     printf("putting element at X: %i, Y: %i\n", mousePos.x, mousePos.y);
-                    world.pixels.push_back(Element((double)mousePos.x, (double)mousePos.y, DIRT));
+                    world.placePixel(&Element((double)mousePos.x, (double)mousePos.y, DIRT));
                 }
             }
         }
@@ -36,15 +36,15 @@ int main()
         //render/update loop
         window.clear(sf::Color::Black);
         for(size_t pixelIndex = 0; pixelIndex < world.pixels.size(); ++pixelIndex) {
-            Element currentPixel = world.pixels.at(pixelIndex);
+            Element* currentPixelPointer = world[pixelIndex];
             //updating
             //e.tick(world.pixels);
-            currentPixel.y += 1;
+            currentPixelPointer->y += 1;
             //TODO: YOU NEED TO ROLL YOUR OWN VECTOR SYSTEM BECAUSE C++ DOESN'T SUPPORT IN PLACE EDITING
             //rendering
             sf::RectangleShape pix(sf::Vector2f(1,1));
-            pix.setPosition((int)floor(currentPixel.x), (int)floor(currentPixel.y));
-            pix.setFillColor(typeColors[currentPixel.type]);
+            pix.setPosition(floor(currentPixel->x), floor(currentPixel->y));
+            pix.setFillColor(typeColors[currentPixel->type]);
             window.draw(pix);
         }
         window.display();
