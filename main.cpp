@@ -34,8 +34,8 @@ int main()
                 }
                 if (!positionTaken) {
                     printf("putting element at X: %i, Y: %i\n", mousePos.x, mousePos.y);
-                    Element currentPixel = Element((double)mousePos.x, (double)mousePos.y, DIRT);
-                    world.placePixel(&currentPixel);
+                    Element* tempElement = new Element((double)mousePos.x, (double)mousePos.y, DIRT);
+                    world.placePixel(tempElement);
                 }
             }
         }
@@ -44,16 +44,14 @@ int main()
         window.clear(sf::Color::Black);
         for(size_t pixelIndex = 0; pixelIndex < WORLD_SIZE; ++pixelIndex) {
             if (world.pixels[pixelIndex] != nullptr) {
-                Element currentPixel = *world.pixels[pixelIndex];
-                printf("drawing pixel X: %i, Y: %i, MAT: %i\n", currentPixel.x, currentPixel.y, currentPixel.type);
+                Element* currentPixel = world.pixels[pixelIndex];
                 //updating
-                //e.tick(world.pixels);
-                //currentPixelPointer->y += 1;
-
+                currentPixel->tick(world.pixels);
+                
                 //rendering
                 sf::RectangleShape pix(sf::Vector2f(1,1));
-                pix.setPosition(floor(currentPixel.x), floor(currentPixel.y));
-                pix.setFillColor(typeColors[currentPixel.type]);
+                pix.setPosition(floor(currentPixel->x), floor(currentPixel->y));
+                pix.setFillColor(typeColors[currentPixel->type]);
                 window.draw(pix);
             }
         }
