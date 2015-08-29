@@ -10,7 +10,7 @@ Element::Element(float xPos, float yPos, types t) {
     type = t;
 }
 
-void Element::tick(std::vector<Element> otherPixels) {
+void Element::tick(Element* otherPixels[]) {
     int willApplyGravity = 1;
     for (auto e : otherPixels) { //for every pixel
         if (&e != this) { //that isn't the current one
