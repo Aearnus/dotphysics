@@ -15,16 +15,16 @@ void Element::tick(Element* otherPixels[]) {
     for (int pixelIndex = 0; pixelIndex < WORLD_SIZE; ++pixelIndex) { //for every pixel
         Element* currentPixel = otherPixels[pixelIndex];
         if (currentPixel != this && currentPixel != nullptr) { //that isn't the current one or null
-            if ((y - currentPixel->y < 1.01) || (y > 5) || floor(x) - floor(currentPixel->x) == 0){ //check if there's another pixel below or you're on the ground
+            if (y > (HEIGHT - 10)) {
                 willApplyGravity = 0;
             }
         }
     }
     if (willApplyGravity) {
-        this->yVel += GRAVITY;
+        yVel += GRAVITY;
     } else {
-        this->yVel = 0;
+        yVel = 0;
     }
-    this->y += yVel;
+    y += yVel;
 }
     
