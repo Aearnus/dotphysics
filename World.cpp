@@ -7,7 +7,7 @@
 World::World() {
     //std::fill_n(pixels, WORLD_SIZE, nullptr);
     for (int y = 0; y < HEIGHT; y++) {
-        for (int x = 0; x < HEIGHT; x++) {
+        for (int x = 0; x < WIDTH; x++) {
             pixels[y][x] = nullptr;
         }
     }   

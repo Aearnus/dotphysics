@@ -23,22 +23,15 @@ int main()
         //placing pixels
         if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
             sf::Vector2i mousePos = sf::Mouse::getPosition(window);
-            if (mousePos.x >= 0 && mousePos.x <= WIDTH && mousePos.y >= 0 && mousePos.y <= HEIGHT) {
+            //if the mouse is in the window
+            if (mousePos.x < WIDTH && mousePos.x > 0 && mousePos.y < HEIGHT && mousePos.y > 0) { 
                 bool positionTaken = false;
-                for(int pixelY = 0; pixelY < HEIGHT; ++pixelY) {
-                    for(int pixelX = 0; pixelX < WIDTH; ++pixelX) {
-                        Element* e = world.pixels[pixelY][pixelX];
-                        if (e != nullptr) {
-                            if (pixelX == mousePos.x || pixelY == mousePos.y) { //if there's not a pixel under your cursor
-                                positionTaken = true;
-                            }
-                        }
-                    }
+                if (world.pixels[mousePos.y][mousePos.x] != nullptr) {
+                    positionTaken = true;
                 }
                 if (!positionTaken) {
                     printf("putting element at X: %i, Y: %i\n", mousePos.x, mousePos.y);
-                    Element* tempElement = new Element(DIRT);
-                    world.placePixel((int)floor(mousePos.x), (int)floor(mousePos.y), tempElement);
+                    world.placePixel((mousePos.x), (mousePos.y), new Element(DIRT));
                 }
             }
         }
@@ -48,14 +41,15 @@ int main()
         for(size_t pixelY = 0; pixelY < HEIGHT; ++pixelY) {
             for(size_t pixelX = 0; pixelX < WIDTH; ++pixelX) {
                 if (world.pixels[pixelY][pixelX] != nullptr) {
-                    Element* currentPixel = world.pixels[pixelY][pixelX];
+                    //Element* currentPixel = world.pixels[pixelY][pixelX];
                     //updating
                     //currentPixel->tick(world.pixels);
                 
                     //rendering
                     sf::RectangleShape pix(sf::Vector2f(1,1));
                     pix.setPosition(pixelX, pixelY);
-                    pix.setFillColor(typeColors[currentPixel->type]);
+                    //pix.setFillColor(typeColors[currentPixel->type]);
+                    pix.setFillColor(sf::Color(200, 150, 0));
                     window.draw(pix);
                 }
             }
