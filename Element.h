@@ -4,10 +4,8 @@
 
 class Element {
 public:
-    Element(float xPos, float yPos, types t);
-    void tick(Element* otherPixels[]);
-	double x;
-	double y;
+    Element(types t);
+    //void tick(Element* otherPixels[]);
 	double xVel;
 	double yVel;
 	types type;
